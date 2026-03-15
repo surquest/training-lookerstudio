@@ -1,0 +1,84 @@
+﻿<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<title>AI Assisted Survey</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<link rel="stylesheet" href="./css/reset.css">
+	<link rel="stylesheet" href="./css/reveal.css">
+	<link rel="stylesheet" href="plugin/highlight/monokai.css" />
+
+	<link id="theme" rel="stylesheet" href="./css/theme.css">
+</head>
+
+<body>
+	<img class="reveal-logo" src="./assets/logo.svg" alt="surQuest Logo">
+	<div class="reveal">
+		<div class="slides">
+			<section 
+				data-markdown="./content/slides.md" 
+				data-separator="^---"
+				data-separator-vertical="^--"
+				>
+			</section>
+		</div>
+
+		<script src="./js/reveal.js"></script>
+		<script src="./js/plugin/notes.js"></script>
+		<script src="./js/plugin/markdown.js"></script>
+		<script src="./js/plugin/highlight.js"></script>
+		<script src="./js/plugin/math.js"></script>
+		<script>
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				markdown: {
+					smartypants: true,
+				},
+
+				plugins: [RevealMarkdown, RevealHighlight, RevealNotes, RevealMath.KaTeX],
+			});
+			// Add copy button to code blocks
+			function addCopyButtonsToCodeBlocks() {
+				document.querySelectorAll('.reveal pre').forEach(function (pre) {
+					// Avoid duplicate buttons
+					if (pre.querySelector('.copy-code-btn')) return;
+					var btn = document.createElement('button');
+					btn.className = 'copy-code-btn';
+					btn.type = 'button';
+					btn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+</svg>
+`;
+					// All styling and hover/active handled by CSS only
+					btn.onclick = function (e) {
+						e.stopPropagation();
+						var code = pre.querySelector('code');
+						var text = code ? code.innerText : pre.innerText;
+						navigator.clipboard.writeText(text).then(function () {
+							var original = btn.innerHTML;
+							btn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+</svg>
+`;
+							setTimeout(function () { btn.innerHTML = original; }, 1200);
+						});
+					};
+					pre.style.position = 'relative';
+					pre.appendChild(btn);
+				});
+			}
+			// Run after slides are loaded and on slide change
+			Reveal.on('ready', addCopyButtonsToCodeBlocks);
+			Reveal.on('slidechanged', addCopyButtonsToCodeBlocks);
+		</script>
+</body>
+
+</html>
