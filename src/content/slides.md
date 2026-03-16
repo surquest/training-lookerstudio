@@ -3,12 +3,26 @@
 ---
 
 # Co dnes vytvoříme?
+
+<div style="display: flex; gap: 40px;">
+
+<div style="flex: 1;">
+
 - Naučíme se základy Looker Studia.
 - Připojíme si náš CSV soubor se školskými daty.
 - Vytvoříme dynamické filtry (Kraj, ORP, Typ školy).
 - Zobrazíme klíčové metriky (počty škol, cizinců a uprchlíků).
 - Analyzujeme věk, ročníky a regionální rozložení.
 
+</div>
+
+<div style="flex: 1;">
+
+![dashboard](./assets/img/dashboard.png)
+
+</div>
+
+</div>
 ---
 
 # Co je to Looker Studio?
@@ -24,7 +38,8 @@
 3. Jako zdroj dat vyberte **Nahrání souboru** (File Upload).
 4. Nahrajte náš soubor [zs.data.sample.xlsx](./assets/data/zs.data.sample.xlsx).
 5. Přidejte nové počítané pole (**rok narození** z `DatNaroz`). 
-6. Klikněte na **Přidat do přehledu**.
+6. Přidejte nové počítané pole (**kraj** z **KrajBudova**  a překódujeme `Hlavní město Praha` na `Prague`)
+7. Klikněte na **Přidat do přehledu**.
 
 ---
 
@@ -44,10 +59,9 @@ Základní sloupce, se kterými budeme pracovat:
 Aby si uživatel mohl data "proklikat", přidáme filtry.
 1. V horním menu klikněte na **Přidat ovládací prvek** -> **Rozbalovací seznam**.
 2. V pravém panelu nastavte **Pole ovládacího prvku** na:
-   - `KrajBudova` (Kraj)
-   - `ORPBudova` (ORP)
-   - `Obec`
-   - `urcena` (Typ školy: určená/neurčená)
+   - `Kraj` (Kraj)
+   - `Rok Narození`
+   - `Urcena` (Typ školy: určená/neurčená)
 
 *Tip: Filtry nyní budou ovlivňovat všechny grafy, které přidáme.*
 
@@ -64,9 +78,11 @@ Kolik máme celkem škol a žáků?
 
 # Regionální rozložení
 Kde se nacházejí určené školy a žáci?
-1. **Přidat graf** -> **Sloupcový graf** (nebo Geografická mapa, pokud máte čisté názvy obcí).
-2. **Dimenze:** `ORPBudova` nebo `KrajBudova`.
-3. **Metrika:** `RedIzo` (Počet unikátních = Počet škol).
+1. **Přidat graf** -> **Kombinovaná mapa** (nebo Geografická mapa, pokud máte čisté názvy obcí).
+2. **Dimenze:** `Kraj`.
+3. **Metriky:** 
+    - `RedIzo` (Počet unikátních = Počet škol).
+    - `CIZALL` (Celkem žáků cizinců)
 4. **Filtrování:** Na graf aplikujte vpravo dole filtr: `urcena` = 1.
 *Vidíme tak, kolik určených škol je v jednotlivých okresech/ORP.*
 
@@ -93,7 +109,7 @@ Jsou cizinci umisťováni do nižších ročníků v porovnání s věkem?
 
 # Žáci v 9. třídách
 Jak jsou na tom cizinci před přechodem na SŠ?
-1. **Přidat graf** -> **Tabulka s pruhy**.
+1. **Přidat graf** -> **Prstencový graf**.
 2. **Dimenze:** `KrajBudova`.
 3. **Metrika:** `CIZALLSum` (celkem cizinců).
 4. **Filtr tabulky:** Nastavte pravidlo `rocnik` = "9. ročník" (případně odpovídající kód z číselníku RARO).
