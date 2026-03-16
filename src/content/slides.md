@@ -15,13 +15,9 @@
 - Analyzujeme věk, ročníky a regionální rozložení.
 
 </div>
-
-<div style="flex: 1;">
-
-![dashboard](./assets/img/dashboard.png)
-
-</div>
-
+    <div style="flex: 1;">
+        <img src="./assets/img/dashboard.png" data-preview-image>
+    </div>
 </div>
 ---
 
