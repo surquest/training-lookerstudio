@@ -109,17 +109,9 @@ Jak jsou na tom cizinci před přechodem na SŠ?
 2. **Dimenze:** `KrajBudova`.
 3. **Metrika:** `CIZALLSum` (celkem cizinců).
 4. **Filtr tabulky:** Nastavte pravidlo `rocnik` = "9. ročník" (případně odpovídající kód z číselníku RARO).
-*Přehledně ukáže, ve kterých regionech bude potřeba řešit kapacitu a jazykovou podporu pro SŠ.*
 
 ---
 
-# Co nás čeká příště?
-**Vývoj počtu žáků v čase!**
-- Připravíme si časové řady (Time series).
-- Ukážeme si, jak roste/klesá počet `CIZ` a `CZE` napříč kraji a ORP.
-- Naučíme se kombinovat data z různých pololetí.
-
----
 
 # Děkuji za pozornost!
 Zkuste si nyní proklikat filtry a prozkoumat data z vašeho regionu.
